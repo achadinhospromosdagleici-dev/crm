@@ -21,6 +21,10 @@
 <% end %>
 
 <%# ATUALIZAÇÃO CIRÚRGICA (SHALLOW UPDATE) PARA VELOCIDADE MÁXIMA NA GAVETA %>
+<%= turbo_stream.update dom_id(@deal, :drawer_status) do %>
+  ● <%= Deal.human_enum_name(:status, @deal.status) %>
+<% end %>
+
 <%= turbo_stream.update dom_id(@deal, :drawer_stage_name) do %>
   <i data-lucide="layers" class="w-3 h-3 text-slate-400"></i>
   <span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">
@@ -28,8 +32,10 @@
   </span>
 <% end %>
 
-<%= turbo_stream.update dom_id(@deal, :drawer_stage_nav) do %>
-  <%= render 'components/deals/stages_nav', deal: @deal %>
+<%= turbo_stream.replace dom_id(@deal, :drawer_stage_nav) do %>
+  <div class="mt-3" id="<%= dom_id(@deal, :drawer_stage_nav) %>">
+    <%= render 'components/deals/stages_nav', deal: @deal %>
+  </div>
 <% end %>
 
 <%= turbo_stream.replace dom_id(@deal, :chatwoot_embed), partial: 'accounts/contacts/chatwoot_embed/deal', locals: { deal: @deal } %>

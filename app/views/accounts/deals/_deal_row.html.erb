@@ -25,7 +25,7 @@
           <% end %>
         </div>
         <div class="flex items-center gap-2 mt-0.5">
-          <span class="text-[10px] uppercase font-bold <%= deal.status == 'open' ? 'text-green-600 dark:text-green-400' : (deal.status == 'won' ? 'text-blue-600 dark:text-blue-400' : 'text-red-500 dark:text-red-400') %>">
+          <span id="<%= dom_id(deal, :drawer_status) %>" class="text-[10px] uppercase font-bold <%= deal.status == 'open' ? 'text-green-600 dark:text-green-400' : (deal.status == 'won' ? 'text-blue-600 dark:text-blue-400' : 'text-red-500 dark:text-red-400') %>">
             ● <%= Deal.human_enum_name(:status, deal.status) %>
           </span>
           <% if deal.next_event_planned? %>

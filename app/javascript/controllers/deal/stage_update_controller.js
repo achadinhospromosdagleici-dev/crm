@@ -4,11 +4,12 @@ export default class extends Controller {
   static targets = ["spinner"]
 
   connect() {
-    this.element.addEventListener("turbo:submit-start", this.showLoading.bind(this))
+    // Escuta cliques pois a mudança de estágio é um link com turbo_method: :patch
+    this.element.addEventListener("click", this.showLoading.bind(this))
   }
 
   showLoading() {
-    if (this.hasSpinnerTarget) {
+    if (this.hasSpinnerTarget && this.spinnerTarget.classList.contains('hidden')) {
       this.spinnerTarget.classList.remove("hidden")
       this.element.classList.add("opacity-50", "pointer-events-none")
     }
